@@ -133,6 +133,26 @@
 								</div>
 							</section>
 
+						<!-- Case Study -->
+							<section id="four">
+								<div class="inner">
+									<header class="major">
+										<h2>Case Study: AI-Assisted Debugging</h2>
+									</header>
+									<p>I use AI as a structured debugging and code-review partner, not as an autopilot. In one recent case, a stored procedure change worked in SQL*Plus and a legacy PowerBuilder application but failed in a Java/PrimeFaces application with an &ldquo;invalid field name&rdquo; error. By comparing the production and modified SQL with an AI coding assistant, I identified that several <code>UPPER(...)</code> expressions needed explicit aliases to preserve the result-set field names expected by the DAO layer. I verified the fix locally, shared the corrected SQL and transcript with the team, and helped resolve an issue that had been blocking a colleague&rsquo;s progress for several days &mdash; in about two minutes.</p>
+									<h3>The Situation</h3>
+									<p>A colleague had modified a stored procedure to uppercase several returned fields. The change worked correctly in SQL*Plus and in the legacy PowerBuilder application, but caused a blank screen in a PrimeFaces application, with JBoss logging an &ldquo;invalid field name&rdquo; error. We agreed the problem likely lived somewhere between the stored procedure output and the Java DAO layer.</p>
+									<h3>The Approach</h3>
+									<p>When my teammate asked me to take a look, I immediately created two comparison artifacts: the current production SQL and the modified SQL. I then used my AI coding assistant as a focused code-review partner, asking it to compare the two files and identify anything that could explain why the Java layer saw an invalid field name.</p>
+									<h3>The Fix</h3>
+									<p>The assistant identified that wrapping selected fields in <code>UPPER(...)</code> changes the result-set column labels unless explicit aliases are supplied. The Java DAO expected the original field names, so the fix was to alias the transformed fields back to those names:</p>
+									<pre><code>UPPER(customer_name) AS customer_name</code></pre>
+									<p>I tested the corrected SQL locally in our PrimeFaces application, confirmed it resolved the issue, and shared both the corrected SQL file and the AI Q&amp;A transcript with the team so they could inspect the reasoning trail.</p>
+									<h3>Result</h3>
+									<p>A bug that had consumed several days of manual investigation was resolved in two minutes through a human-led, AI-assisted workflow using actual project artifacts, targeted prompting, and local verification.</p>
+								</div>
+							</section>
+
 					</div>
 
 				<!-- Contact -->
@@ -196,7 +216,7 @@
 							<ul class="icons">
 								<li><a href="https://www.linkedin.com/in/ron-ruffin-a967451/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
 								<li><a href="https://github.com/eGantry" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands alt fa-youtube"><span class="label">YouTube</span></a></li>
+								<li><a href="https://www.youtube.com/@DQ-QuizLabs" class="icon brands alt fa-youtube"><span class="label">YouTube</span></a></li>
 							</ul>
 							<ul class="copyright">
 								<li>&copy; Ronald A. Ruffin</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
